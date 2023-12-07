@@ -7,8 +7,18 @@ data "aws_s3_object" "existing_lambda_object" {
   key    = var.lambda_code_zip
 }
 
-data "aws_lambda_layer_version" "existing_layer" {
-  layer_name = "new_package"
+data "aws_s3_object" "existing_lambda_layer" {
+  bucket = data.aws_s3_bucket.existing_lambda_bucket.bucket
+  key    = "python.zip" # Replace with the actual key of your existing S3 object
+}
+
+resource "aws_lambda_layer_version" "existing_lambda_layer" {
+  s3_bucket           = data.aws_s3_bucket.existing_lambda_layer.id
+  s3_key              = data.aws_s3_object.existing_lambda_layer.key
+  layer_name          = "lambda_package"
+  compatible_runtimes = ["python3.8"]
+  skip_destroy        = true
+  s3_object_version = data.aws_s3_object.existing_lambda_layer.version_id
 }
 
 resource "aws_lambda_function" "terraform_lambda_func" {
@@ -24,7 +34,7 @@ resource "aws_lambda_function" "terraform_lambda_func" {
       S3_BUCKET_NAME = data.aws_s3_bucket.existing_lambda_bucket.id
     }
   }
-  layers = [data.aws_lambda_layer_version.existing_layer.arn]
+  layers = [aws_lambda_layer_version.existing_lambda_layer.arn]
   depends_on = [data.aws_s3_bucket.existing_lambda_bucket, aws_cloudwatch_log_group.example]
 }
 
