@@ -7,6 +7,10 @@ data "aws_s3_object" "existing_lambda_object" {
   key    = var.lambda_code_zip
 }
 
+data "aws_lambda_layer_version" "existing_layer" {
+  layer_name = "new_package"
+}
+
 resource "aws_lambda_function" "terraform_lambda_func" {
   function_name    = var.lambda_function_name
   role             = var.lambda_role_arn
@@ -20,6 +24,7 @@ resource "aws_lambda_function" "terraform_lambda_func" {
       S3_BUCKET_NAME = data.aws_s3_bucket.existing_lambda_bucket.id
     }
   }
+  layers = [data.aws_lambda_layer_version.existing_layer.arn]
   depends_on = [data.aws_s3_bucket.existing_lambda_bucket, aws_cloudwatch_log_group.example]
 }
 
