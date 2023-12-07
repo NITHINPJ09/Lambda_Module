@@ -13,7 +13,7 @@ data "aws_s3_object" "existing_lambda_layer" {
 }
 
 resource "aws_lambda_layer_version" "existing_lambda_layer" {
-  s3_bucket           = data.aws_s3_bucket.existing_lambda_layer.id
+  s3_bucket           = data.aws_s3_bucket.existing_lambda_bucket.id
   s3_key              = data.aws_s3_object.existing_lambda_layer.key
   layer_name          = "lambda_package"
   compatible_runtimes = ["python3.8"]
