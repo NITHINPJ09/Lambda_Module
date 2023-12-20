@@ -1,5 +1,5 @@
 resource "aws_security_group" "lambda_sg" {
-  name        = "demo_lambda_security_group"
+  name        = "lambda_security_group"
   description = "Security group for Lambda function"
   vpc_id      = var.vpc_id 
 
