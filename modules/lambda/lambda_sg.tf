@@ -1,7 +1,7 @@
 resource "aws_security_group" "lambda_sg" {
   name        = "lambda_security_group"
   description = "Security group for Lambda function"
-  vpc_id      = data.aws_vpc.existing_vpc.id # Replace with your VPC ID
+  vpc_id      = var.vpc_id 
 
   ingress {
     from_port   = 80 # Allow inbound traffic on port 80 (HTTP)
