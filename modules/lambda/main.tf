@@ -21,7 +21,7 @@ resource "aws_lambda_function" "terraform_lambda_func" {
     }
   }
   #layers = [var.layer_arn]
-  layers = [null]
+  layers = []
   depends_on = [data.aws_s3_bucket.existing_lambda_bucket, aws_cloudwatch_log_group.example]
 }
 
