@@ -60,7 +60,7 @@ data "aws_s3_object" "existing_lambda_object" {
 
 resource "aws_lambda_function" "terraform_lambda_func" {
   function_name    = var.lambda_function_name
-  role             = var.lambda_role_arn
+  role             = aws_iam_role.lambda_role.arn
   handler          = var.handler
   runtime          = "python3.8"
   s3_bucket        = data.aws_s3_bucket.existing_lambda_bucket.id
