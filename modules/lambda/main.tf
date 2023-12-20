@@ -9,7 +9,7 @@ data "aws_s3_object" "existing_lambda_object" {
 
 resource "aws_lambda_function" "terraform_lambda_func" {
   function_name    = var.lambda_function_name
-  role             = aws_iam_role.lambda_role.arn
+  role             = var.role
   handler          = var.handler
   runtime          = "python3.8"
   s3_bucket        = data.aws_s3_bucket.existing_lambda_bucket.id
@@ -24,9 +24,9 @@ resource "aws_lambda_function" "terraform_lambda_func" {
   #layers = []
   vpc_config {
     subnet_ids         = var.private_subnets_id
-    security_group_ids = [aws_security_group.lambda_sg.id] # Add security group IDs if necessary
+    security_group_ids = [var.security_group_ids] # Add security group IDs if necessary
   }
-  depends_on = [aws_iam_role_policy_attachment.attach_iam_policy_to_iam_role, data.aws_s3_bucket.existing_lambda_bucket, aws_cloudwatch_log_group.example]
+  depends_on = [data.aws_s3_bucket.existing_lambda_bucket, aws_cloudwatch_log_group.example]
 }
 
 resource "aws_cloudwatch_log_group" "example" {

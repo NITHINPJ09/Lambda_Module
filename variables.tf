@@ -25,3 +25,11 @@ variable "lambda_first_function_name" {
 variable "lambda_second_function_name" {
   description = "Name of the second lambda function"
 }
+
+variable "lambda_layer_zip_key" {
+}
+
+variable "layer_name" {
+}
+
+

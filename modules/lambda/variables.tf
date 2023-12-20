@@ -18,10 +18,6 @@ variable "handler" {
   description = "Name of the handler"
 }
 
-variable "vpc_id" {
-  description = "ID of the VPC"
-}
-
 variable "private_subnets_id" {
   description = "ID's of the private subnets"
 }
@@ -30,5 +26,12 @@ variable "layer_arn" {
   description = "ARN of the layer"
 }
 
+variable "role" {
+  description = "Lambda role"
+}
+
+variable "security_group_ids" {
+  
+}
 
 
