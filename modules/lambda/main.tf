@@ -77,7 +77,7 @@ resource "aws_lambda_function" "terraform_lambda_func" {
     subnet_ids         = data.aws_subnets.private_subnets.ids
     security_group_ids = [aws_security_group.lambda_sg.id] # Add security group IDs if necessary
   }
-  depends_on = [data.aws_s3_bucket.existing_lambda_bucket, aws_cloudwatch_log_group.example]
+  depends_on = [aws_iam_role_policy_attachment.attach_iam_policy_to_iam_role, data.aws_s3_bucket.existing_lambda_bucket, aws_cloudwatch_log_group.example]
 }
 
 resource "aws_cloudwatch_log_group" "example" {
