@@ -22,5 +22,13 @@ variable "handler" {
   description = "Name of the handler"
 }
 
+variable "vpc_id" {
+  description = "ID of the VPC"
+}
+
+variable "private_subnets_id" {
+  description = "ID's of the private subnets"
+}
+
 
 
