@@ -17,5 +17,6 @@ module "SecondLambda" {
   lambda_function_name = var.lambda_second_function_name
   handler              = "hi-python.lambda_handler"
   environment          = var.environment
-  layer_arn            = aws_lambda_layer_version.existing_lambda_layer.arn
+  #layer_arn            = aws_lambda_layer_version.existing_lambda_layer.arn
+  layer_arn            = ""
 }
