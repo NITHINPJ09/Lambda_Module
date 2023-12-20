@@ -26,5 +26,9 @@ variable "private_subnets_id" {
   description = "ID's of the private subnets"
 }
 
+variable "layer_arn" {
+  description = "ARN of the layer"
+}
+
 
 
