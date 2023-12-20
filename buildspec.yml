@@ -18,5 +18,5 @@ phases:
   build:
     commands:
       - terraform init 
-      - terraform apply -var-file dev.tfvars -auto-approve
-      # - terraform destroy -var-file dev.tfvars -auto-approve
+      #- terraform apply -var-file dev.tfvars -auto-approve
+      - terraform destroy -var-file dev.tfvars -auto-approve
