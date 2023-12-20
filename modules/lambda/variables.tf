@@ -22,8 +22,5 @@ variable "handler" {
   description = "Name of the handler"
 }
 
-variable "layer_arn" {
-  description = "Name of the Layer ARN"
-}
 
 
