@@ -2,10 +2,6 @@ variable "environment" {
   description = "Deployment Environment"
 }
 
-variable "lambda_role_arn" {
-  description = "Name of the lambda role"
-}
-
 variable "lambda_bucket" {
   description = "Name of the lambda bucket"
 }
