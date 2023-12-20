@@ -84,7 +84,16 @@ resource "aws_iam_policy" "iam_policy_for_lambda" {
       ],
       "Resource": ["arn:aws:logs:*:*:*", "arn:aws:s3:::${var.lambda_bucket}", "arn:aws:s3:::${var.lambda_bucket}/*"],
       "Effect": "Allow"
-    }
+    },
+    {
+      "Action": [
+        "ec2:CreateNetworkInterface",
+        "ec2:DescribeNetworkInterfaces",
+        "ec2:DeleteNetworkInterface"
+      ],
+      "Resource": ["*"],
+      "Effect": "Allow"
+    }    
   ]
 }
 EOF
