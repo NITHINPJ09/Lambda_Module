@@ -20,7 +20,8 @@ resource "aws_lambda_function" "terraform_lambda_func" {
       S3_BUCKET_NAME = data.aws_s3_bucket.existing_lambda_bucket.id
     }
   }
-  layers = [var.layer_arn]
+  layers = var.include_layers ? [var.layer_arn] : []
+  #layers = [var.layer_arn]
   #layers = []
   vpc_config {
     subnet_ids         = var.private_subnets_id
