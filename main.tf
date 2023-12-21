@@ -25,9 +25,9 @@ module "lambda_layer" {
 module "FirstLambda" {
   source               = "./modules/lambda"
   lambda_bucket        = var.lambda_bucket
-  lambda_code_zip      = var.lambda_code_first_zip
-  lambda_function_name = var.lambda_first_function_name
-  handler              = "hello-python.lambda_handler"
+  lambda_code_zip      = var.first_lambda.lambda_code
+  lambda_function_name = var.first_lambda.lambda_function_name
+  handler              = var.first_lambda.handler
   environment          = var.environment
   role                 = module.lambda_iam.lambda_role_arn
   security_group_ids   = module.lambda_security_group.lambda_sg_id
@@ -39,9 +39,9 @@ module "FirstLambda" {
 module "SecondLambda" {
   source               = "./modules/lambda"
   lambda_bucket        = var.lambda_bucket
-  lambda_code_zip      = var.lambda_code_second_zip
-  lambda_function_name = var.lambda_second_function_name
-  handler              = "hi-python.lambda_handler"
+  lambda_code_zip      = var.second_lambda.lambda_code
+  lambda_function_name = var.second_lambda.lambda_function_name
+  handler              = var.second_lambda.handler
   environment          = var.environment
   role                 = module.lambda_iam.lambda_role_arn
   security_group_ids   = module.lambda_security_group.lambda_sg_id
