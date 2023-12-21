@@ -31,8 +31,7 @@ module "FirstLambda" {
   environment          = var.environment
   role                 = module.lambda_iam.lambda_role_arn
   security_group_ids   = module.lambda_security_group.lambda_sg_id
-  #include_layers       = false
-  layer_arn            = module.lambda_layer.layer_arn
+  layer_arn            = ""
   private_subnets_id   = module.network.private_subnets_id
   depends_on           = [module.network, module.lambda_iam, module.lambda_security_group, module.lambda_layer]
 }
@@ -46,7 +45,7 @@ module "SecondLambda" {
   environment          = var.environment
   role                 = module.lambda_iam.lambda_role_arn
   security_group_ids   = module.lambda_security_group.lambda_sg_id
-  include_layers       = false
+  include_layers       = true
   layer_arn            = module.lambda_layer.layer_arn
   private_subnets_id   = module.network.private_subnets_id
   depends_on           = [module.network, module.lambda_iam, module.lambda_security_group, module.lambda_layer]
