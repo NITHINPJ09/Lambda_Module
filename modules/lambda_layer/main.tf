@@ -1,10 +1,10 @@
 data "aws_s3_bucket" "existing_lambda_bucket" {
-  bucket = var.lambda_bucket # Replace with the actual name of your existing S3 bucket
+  bucket = var.lambda_bucket
 }
 
 data "aws_s3_object" "existing_lambda_layer" {
   bucket = data.aws_s3_bucket.existing_lambda_bucket.bucket
-  key    = var.lambda_layer_zip_key # Replace with the actual key of your existing S3 object
+  key    = var.lambda_layer_zip_key 
 }
 
 resource "aws_lambda_layer_version" "existing_lambda_layer" {

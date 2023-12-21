@@ -1,5 +1,5 @@
 data "aws_s3_bucket" "existing_lambda_bucket" {
-  bucket = var.lambda_bucket # Replace with the actual name of your existing S3 bucket
+  bucket = var.lambda_bucket 
 }
 
 data "aws_s3_object" "existing_lambda_object" {
@@ -21,11 +21,9 @@ resource "aws_lambda_function" "terraform_lambda_func" {
     }
   }
   layers = var.include_layers ? [var.layer_arn] : []
-  #layers = [var.layer_arn]
-  #layers = []
   vpc_config {
     subnet_ids         = var.private_subnets_id
-    security_group_ids = [var.security_group_ids] # Add security group IDs if necessary
+    security_group_ids = [var.security_group_ids] 
   }
   depends_on = [data.aws_s3_bucket.existing_lambda_bucket, aws_cloudwatch_log_group.example]
 }

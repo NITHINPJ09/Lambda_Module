@@ -17,7 +17,6 @@ data "aws_subnets" "private_subnets" {
     values = [data.aws_vpc.existing_vpc.id]
   }
 
-  // Filter to select private subnets based on your criteria
   filter {
     name   = "tag:Name"
     values = ["*private-subnet*"]

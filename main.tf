@@ -20,8 +20,6 @@ module "lambda_layer" {
   layer_name           = var.layer_name
 }
 
-
-
 module "FirstLambda" {
   source               = "./modules/lambda"
   lambda_bucket        = var.lambda_bucket
@@ -49,4 +47,12 @@ module "SecondLambda" {
   layer_arn            = module.lambda_layer.layer_arn
   private_subnets_id   = module.network.private_subnets_id
   depends_on           = [module.network, module.lambda_iam, module.lambda_security_group, module.lambda_layer]
+}
+
+module "apigateway" {
+  source         = "./modules/api_gateway"
+  lambda_details = module.FirstLambda.lambda_details
+  environment    = var.environment
+  endpoint_path  = var.endpoint_path
+  depends_on     = [module.FirstLambda]
 }
