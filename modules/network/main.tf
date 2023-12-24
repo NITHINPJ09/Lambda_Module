@@ -1,7 +1,7 @@
 data "aws_vpc" "existing_vpc" {
   filter {
     name   = "tag:Environment"
-    values = ["dev"]
+    values = [var.environment]
   }
 
   filter {
@@ -23,3 +23,8 @@ data "aws_subnets" "private_subnets" {
   }
   
 }
+
+data "aws_security_group" "default" {
+  name = "${var.environment}-default-sg"
+}
+
